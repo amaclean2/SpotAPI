@@ -1,46 +1,53 @@
-import React, { useEffect } from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 const App: React.FC = () => {
+  const [loginString, setLoginString] = useState("")
   useEffect(() => {
-    console.log("On load")
-    const
-      clientID = "668e28df2f574688a99805e534c1ee83",
-      clientSecret = "986008add0c747a4ac077d84de91b99b",
-      encodedStr = window.btoa(`${clientID}:${clientSecret}`)
+    const path = window.location.hash
+    if(path) {
+      const pathArr = path.substr(1).split("&").reduce((obj: any, item: string) => {
+        const
+          keyValArr: Array<any> = item.split("="),
+          key: string = decodeURIComponent(keyValArr[0])
 
-    console.log(encodedStr)
+        obj[key] = keyValArr[1]
+        return obj
+      }, {})
+      console.log(pathArr)
+      fetch(`https://api.spotify.com/v1/me`, {
+        method: "GET",
+        headers: new Headers({
+          "Authorization": `Bearer ${pathArr.access_token}`
+        })
+      }).then(resp => resp.json())
+      .then(console.log)
+      .catch(console.error)
 
-    fetch(`https://accounts.spotify.com/api/token`, {
-      method: "POST",
-      headers: new Headers({
-        "Authorization": `Basic ${encodedStr}`,
-      }),
-      body: JSON.stringify({
-        "grant_type": "client_credentials"
-      })
-    }).then(resp => resp.json())
-    .then(console.log)
-    .catch(console.error)
+      
+    } else {
+      const
+      responseType = "response_type=token",
+      clientId = "client_id=668e28df2f574688a99805e534c1ee83",
+      redirectUri = "redirect_uri=http://localhost:3000",
+      showDialog = "show_dialog=true",
+      stateVar = Array(15).fill(1).reduce( str => {
+        const
+          upper = Math.floor(Math.random() * 26) + 65,
+          lower = Math.floor(Math.random() * 26) + 97,
+          decision = Math.floor(Math.random() * 2)
 
+        return str + String.fromCharCode((decision) ? upper : lower)
+      }, ""),
+      state = `state=${stateVar}`,
+      spotifyAuthPage = `https://accounts.spotify.com/authorize?${responseType}&${clientId}&${redirectUri}&${state}&${showDialog}`
+      setLoginString(spotifyAuthPage)
+    }
   }, [])
+    
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {(loginString) ? <a href={loginString}>Connect to Spotify</a> : ""}
     </div>
   );
 }
