@@ -1,10 +1,16 @@
 import React from 'react'
-import './App.css'
+import './App.scss'
 import Router from './Router'
+import { Provider } from 'react-redux'
+import configureStore from './Redux/configureStore'
+
+const store = configureStore()
 
 const App: React.FC = () => { 
   return (
-    <Router />
+    <Provider store={store}>
+        <Router />
+    </Provider>
   )
 }
 

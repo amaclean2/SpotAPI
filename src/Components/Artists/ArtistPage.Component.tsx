@@ -2,40 +2,22 @@ import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 // import PropTypes from 'prop-types'
 
-const baseString:string = "https://api.spotify.com/v1"
-
-interface Props {
-    match: any
-}
-
-const ArtistPage: React.FC<Props> = (props) => {
+const ArtistPage: React.FC = (props:any) => {
     const
         [artist, setArtist] = useState(),
         [topTracks, setTopTracks] = useState()
 
     useEffect(() => {
-        const
-            access_token:string = localStorage.getItem("access_token") || "",
-            headers = new Headers({
-			    "Authorization": `Bearer ${access_token}`
-            })
-        
-        fetch(`${baseString}/artists/${props.match.params.id}`, {
-            method: "GET",
-            headers
-        }).then(resp => resp.json())
-        .then(data => setArtist(data))
-        .catch(console.error)
+        props.getArtist(props.match.params.id)
+        props.getTopTracks(props.match.params.id)
+    }, [props.getArtists, props.getTopTracks])
 
-        fetch(`${baseString}/artists/${props.match.params.id}/top-tracks?country=US`, {
-            method: "GET",
-            headers
-        }).then(resp => resp.json())
-        .then(data => setTopTracks(data))
-        .catch(console.error)
-    }, [])
+    useEffect(() => {
+        setArtist(props.artist)
+        setTopTracks(props.tracks)
+    }, [props.artist, props.tracks])
 
-    const showArtistDetails:any = () => {
+    const showArtistDetails = () => {
         return (artist)
             ? (
                 <div>
@@ -52,8 +34,8 @@ const ArtistPage: React.FC<Props> = (props) => {
             ) : ""
     }
 
-    const showTopTracks:any = () => {
-        return (topTracks)
+    const showTopTracks = () => {
+        return (topTracks && topTracks.tracks)
             ? (
                 <div>
                     {topTracks.tracks.map((track:any , key:number) => (<div key={`track_${key}`}>{track.name} - {track.album.name}</div>))}
@@ -63,9 +45,9 @@ const ArtistPage: React.FC<Props> = (props) => {
 
 	return (
         <div>
+            <NavLink to="/home">Back to Home</NavLink>
             {showArtistDetails()}
             {showTopTracks()}
-            <NavLink to="/home">Back to Home</NavLink>
         </div>
     )
 }

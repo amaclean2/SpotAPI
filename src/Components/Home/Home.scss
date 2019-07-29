@@ -1,0 +1,32 @@
+.search-bar {
+    width: 100vw;
+    flex-direction: column;
+
+    h2 {
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        width: 100vw;
+        margin: 0 0 20px;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    input {
+        font-size: 20px;
+        padding: 5px 10px;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid #CCC;
+        width: 100vw;
+        box-sizing: border-box;
+    }
+
+    .controls {
+        flex-direction: column;
+
+        .control {
+            justify-content: center;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+    }
+}

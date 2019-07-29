@@ -1,8 +1,8 @@
 import React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
-import Home from './Home'
+import Home from './Components/Home/Home.Container'
 import Login from './Login'
-import ArtistPage from './ArtistPage'
+import ArtistPage from './Components/Artists/ArtistPage.Container'
 
 const Router: React.FC = () => {
 	return (

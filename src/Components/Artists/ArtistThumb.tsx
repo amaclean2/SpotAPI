@@ -9,12 +9,11 @@ interface Props {
 const ArtistThumb: React.FC<Props> = (props) => {
 	const imageUrl = props.artist.image
 
-	console.log(props.artist)
-
 	return (
-		<NavLink to={`/artist/${props.artist.id}`}>
-			<img className="artist-thumb" src={imageUrl} alt={props.artist.name} />
+		<NavLink to={`/artist/${props.artist.id}`} className="artist-thumb flex-container">
+			<img src={imageUrl} alt={props.artist.name} />
 			{props.artist.name}
+			<div className="flex-spacer"></div>
 		</NavLink>
 	)
 }

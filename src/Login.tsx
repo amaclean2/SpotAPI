@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter, Route } from 'react-router-dom'
 // import PropTypes from 'prop-types'
 
 const Login: React.FC = () => {
