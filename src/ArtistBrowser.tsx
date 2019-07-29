@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 // import PropTypes from 'prop-types'
 import ArtistThumb from './ArtistThumb'
 
-const ArtistBrowser = (props:any) => {
-	const [artistList, setArtistList] = useState([])
+interface Props {
+	artists:any
+}
 
-	useEffect(() => {
-		setArtistList(props.artists)
-	}, [props.artists])
+const ArtistBrowser: React.FC<Props> = (props) => {
+	console.log(props.artists)
 
 	const showArtistList = () => {
-		if (!!artistList) {
-			return <div>
-				{artistList.map( (artist, key) => <ArtistThumb key={`artist_${key}`} artist={artist} />)}
-			</div>
+		if (!!props.artists) {
+			return (
+				<div>
+					{props.artists.map( (artist:any, key:number) => <ArtistThumb key={`artist_${key}`} artist={artist} />)}
+				</div>
+			)
 		} else {
 			return ""
 		}
@@ -22,7 +24,7 @@ const ArtistBrowser = (props:any) => {
 	return (
 		<div>
 			<h3>Artists</h3>
-			{ showArtistList() }
+			{showArtistList()}
 		</div>
 	)
 }

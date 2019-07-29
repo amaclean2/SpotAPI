@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 // import PropTypes from 'prop-types'
 
-const Login = () => {
+const Login: React.FC = () => {
     const
         [loginString, setLoginString] = useState("")
 

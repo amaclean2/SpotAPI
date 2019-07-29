@@ -2,8 +2,14 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 // import PropTypes from 'prop-types'
 
-const ArtistBrowser = (props:any) => {
-	const imageUrl = props.artist.images && props.artist.images[0] && props.artist.images[0].url
+interface Props {
+	artist:any
+}
+
+const ArtistThumb: React.FC<Props> = (props) => {
+	const imageUrl = props.artist.image
+
+	console.log(props.artist)
 
 	return (
 		<NavLink to={`/artist/${props.artist.id}`}>
@@ -13,4 +19,4 @@ const ArtistBrowser = (props:any) => {
 	)
 }
 
-export default ArtistBrowser
+export default ArtistThumb

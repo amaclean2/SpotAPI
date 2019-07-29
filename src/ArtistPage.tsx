@@ -4,16 +4,20 @@ import { NavLink } from 'react-router-dom'
 
 const baseString:string = "https://api.spotify.com/v1"
 
-const ArtistPage = (props:any) => {
+interface Props {
+    match: any
+}
+
+const ArtistPage: React.FC<Props> = (props) => {
     const
-        [artist, setArtist] = useState()
+        [artist, setArtist] = useState(),
+        [topTracks, setTopTracks] = useState()
 
     useEffect(() => {
         const
-            tokenStr:string = localStorage.getItem("tokens") || "",
-            tokens:any = JSON.parse(tokenStr),
-            headers:Headers = new Headers({
-			    "Authorization": `${tokens.token_type} ${tokens.access_token}`
+            access_token:string = localStorage.getItem("access_token") || "",
+            headers = new Headers({
+			    "Authorization": `Bearer ${access_token}`
             })
         
         fetch(`${baseString}/artists/${props.match.params.id}`, {
@@ -22,10 +26,16 @@ const ArtistPage = (props:any) => {
         }).then(resp => resp.json())
         .then(data => setArtist(data))
         .catch(console.error)
+
+        fetch(`${baseString}/artists/${props.match.params.id}/top-tracks?country=US`, {
+            method: "GET",
+            headers
+        }).then(resp => resp.json())
+        .then(data => setTopTracks(data))
+        .catch(console.error)
     }, [])
 
     const showArtistDetails:any = () => {
-        console.log(artist)
         return (artist)
             ? (
                 <div>
@@ -38,7 +48,15 @@ const ArtistPage = (props:any) => {
                         <h4>Genres</h4>
                         {artist.genres.map( (genre:string, key:number) => <span className="genre" key={`genre_${key}`} >{genre}</span>)}
                     </div>
-                    <NavLink to="/artists">Back to Artists</NavLink>
+                </div>
+            ) : ""
+    }
+
+    const showTopTracks:any = () => {
+        return (topTracks)
+            ? (
+                <div>
+                    {topTracks.tracks.map((track:any , key:number) => (<div key={`track_${key}`}>{track.name} - {track.album.name}</div>))}
                 </div>
             ) : ""
     }
@@ -46,6 +64,8 @@ const ArtistPage = (props:any) => {
 	return (
         <div>
             {showArtistDetails()}
+            {showTopTracks()}
+            <NavLink to="/home">Back to Home</NavLink>
         </div>
     )
 }
