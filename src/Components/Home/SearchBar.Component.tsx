@@ -64,6 +64,7 @@ const SearchBar: React.FC<Props> = ({
         >
           <input
             type="text"
+            autoFocus={true}
             placeholder="Search Artists"
             onChange={(e) => searchArtists(e.target.value)}
           />
