@@ -26,7 +26,6 @@ const Router: React.FC = () => {
 
     const checkToken = (component:any) => {
         if (localStorage.getItem("access_token")) {
-            console.log(localStorage.getItem("access_token"))
             return component
         } else {
             return Login
