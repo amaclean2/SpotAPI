@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
-const ArtistPage: React.FC = (props:any) => {
-    const
-        [artist, setArtist] = useState(),
-        [topTracks, setTopTracks] = useState()
+interface Props {
+    getArtist:any,
+    getTopTracks:any,
+    artist:any,
+    tracks:any,
+    match:any
+}
+
+const ArtistPage: React.FC<Props> = ({ getArtist, getTopTracks, artist, tracks, match}) => {
+    useEffect(() => {
+        getArtist(match.params.id)
+        getTopTracks(match.params.id)
+    }, [getArtist, getTopTracks])
 
     useEffect(() => {
-        props.getArtist(props.match.params.id)
-        props.getTopTracks(props.match.params.id)
-    }, [props.getArtists, props.getTopTracks])
-
-    useEffect(() => {
-        setArtist(props.artist)
-        setTopTracks(props.tracks)
-    }, [props.artist, props.tracks])
+    }, [artist, tracks])
 
     const showArtistDetails = () => {
         if (artist) {
@@ -50,11 +52,11 @@ const ArtistPage: React.FC = (props:any) => {
     )
 
     const showTopTracks = () => {
-        return (topTracks && topTracks.tracks)
+        return (tracks && tracks.tracks)
             ? (
                 <div className="top-tracks">
                     <h3>Popular</h3>
-                    {topTracks.tracks.map((track:any , key:number) => trackThumb(track, key))}
+                    {tracks.tracks.map((track:any , key:number) => trackThumb(track, key))}
                 </div>
             ) : ""
     }
@@ -66,6 +68,14 @@ const ArtistPage: React.FC = (props:any) => {
             {showTopTracks()}
         </div>
     )
+}
+
+ArtistPage.propTypes = {
+    match: PropTypes.object,
+    getTopTracks: PropTypes.func,
+    getArtist: PropTypes.func,
+    tracks: PropTypes.object,
+    artist: PropTypes.object
 }
 
 export default ArtistPage

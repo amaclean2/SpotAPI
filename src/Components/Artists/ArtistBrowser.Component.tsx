@@ -1,20 +1,20 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import ArtistThumb from './ArtistThumb'
 
 interface Props {
 	artists:any,
-	handlePag: Function,
+	handlePag:any
 }
 
-const ArtistBrowser: React.FC<Props> = (props) => {
+const ArtistBrowser: React.FC<Props> = ({ artists, handlePag }) => {
 	
 	const showArtistList = () => {
-		if (!!props.artists.artists) {
+		if (!!artists.artists) {
 			return (
 				<div>
 					<h3 className="category-header">Artists</h3>
-					{props.artists.artists && props.artists.artists.map( (artist:any, key:number) => <ArtistThumb key={`artist_${key}`} artist={artist} />)}
+					{artists.artists && artists.artists.map( (artist:any, key:number) => <ArtistThumb key={`artist_${key}`} artist={artist} />)}
 					{showPag()}
 				</div>
 			)
@@ -26,9 +26,9 @@ const ArtistBrowser: React.FC<Props> = (props) => {
 	const showPag = () => {
 		return (
 			<div className="pagination flex-container">
-				{(props.artists.previous) ? <button onClick={() => props.handlePag(props.artists.previous, "artists")} >Previous</button> : ""}
+				{(artists.previous) ? <button onClick={() => handlePag(artists.previous, "artists")} >Previous</button> : ""}
 				<div className="flex-spacer" />
-				{(props.artists.next) ? <button onClick={() => props.handlePag(props.artists.next, "artists")} >Next</button> : ""}
+				{(artists.next) ? <button onClick={() => handlePag(artists.next, "artists")} >Next</button> : ""}
 			</div>
 		)
 	}
@@ -38,6 +38,11 @@ const ArtistBrowser: React.FC<Props> = (props) => {
 			{showArtistList()}
 		</div>
 	)
+}
+
+ArtistBrowser.propTypes = {
+	artists: PropTypes.object,
+	handlePag: PropTypes.func
 }
 
 export default ArtistBrowser

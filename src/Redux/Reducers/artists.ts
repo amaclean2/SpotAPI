@@ -1,5 +1,7 @@
 import { types } from '../Types'
 
+// artist search and artist page reducers
+
 export const artists = (state = {}, action:any) => {
     switch(action.type) {
         case types.requestArtists :

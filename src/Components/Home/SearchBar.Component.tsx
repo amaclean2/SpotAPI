@@ -1,20 +1,18 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import PropTypes, { func } from 'prop-types'
 
-const SearchBar: React.FC = (props:any) => {
+interface Props {
+	searchArtists: any,
+	searchSongs: any,
+	clearScreen: any
+}
+
+const SearchBar: React.FC<Props> = ({ searchArtists, searchSongs, clearScreen }) => {
 	const [selector, setSelector] = useState("artists")
 
-	const searchArtists = (artistQuery: string) => {
-		props.searchArtists(artistQuery)
-	}
-
-	const searchSongs = (songQuery: string) => {
-		props.searchSongs(songQuery)
-	}
-
 	const handleSelectorChagne = (e:any) => {
-		props.clearScreen()
+		clearScreen()
 		setSelector(e.target.value)
 	}
 
@@ -71,7 +69,9 @@ const SearchBar: React.FC = (props:any) => {
 }
 
 SearchBar.propTypes = {
-	tokens: PropTypes.object
+	searchArtists: func,
+	searchSongs: func,
+	clearScreen: func
 }
 
 export default SearchBar

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import SongBroswer from './SongBroser.Component'
+import SongBroswer from './SongBrowser.Component'
 
 const mapStateToProps = (state:any) => ({
     songs: state.songs

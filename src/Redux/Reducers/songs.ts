@@ -1,5 +1,7 @@
 import { types } from '../Types'
 
+// song reducers
+
 export const songs = (state = {}, action:any) => {
     switch(action.type) {
         case types.requestSongs :
