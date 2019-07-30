@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 import Home from './Components/Home/Home.Component'
-import Login from './Login'
+import Login from './Components/Login/Login'
 import ArtistPage from './Components/Artists/ArtistPage.Container'
 
 const Router: React.FC = () => {

@@ -3,6 +3,10 @@ import * as actions from './Actions'
 const baseString = "https://api.spotify.com/v1"
 const access_token = localStorage.getItem("access_token") || ""
 
+// @desc api call to get songs in a search query
+// @param query if it is the initial query
+// @param paginateStr if it is a paginated search query
+
 export const searchSongs: Function = (query: string | null, paginageStr?: string) => {
     return (dispatch: Function) => {
         query = query && query.replace(" ", "%20")
@@ -32,12 +36,18 @@ export const searchSongs: Function = (query: string | null, paginageStr?: string
     }
 }
 
+// @desc clears all data from the redux store
+
 export const clearScreen: Function = () => {
     return (dispatch: Function) => {
         dispatch(actions.clearArtists())
         dispatch(actions.clearSongs())
     }
 }
+
+// @desc api call to get artists in a search query
+// @param query if it is the initial query
+// @param paginateStr if it is a paginated search query
 
 export const searchArtists: Function = (query: string | null, paginateStr?: string) => {
     return (dispatch: Function) => {
@@ -66,6 +76,9 @@ export const searchArtists: Function = (query: string | null, paginateStr?: stri
     }
 }
 
+// @desc api call to get the data for the artist profile
+// @param artistId for the artist
+
 export const getArtist: Function = (artistId: string) => {
     return (dispatch: Function) => {
         dispatch(actions.requestArtist())
@@ -83,6 +96,9 @@ export const getArtist: Function = (artistId: string) => {
         }).catch(console.error)
     }
 }
+
+// @desc api call to get the top track data for the artist profile
+// @param artistId for the artist
 
 export const getTopTracks: Function = (artistId: string) => {
     return (dispatch: Function) => {
