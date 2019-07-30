@@ -18,4 +18,8 @@ body {
 
 @import './Components/Artists/Artists.scss';
 @import './Components/Home/Home.scss';
-@import './Components/Songs/Songs.scss'
+@import './Components/Songs/Songs.scss';
+
+.gone {
+  display: none;
+}

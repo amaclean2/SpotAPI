@@ -13,20 +13,29 @@ export const searchSongs: Function = (query: string | null, paginageStr?: string
 			headers: new Headers({
 				"Authorization": `Bearer ${access_token}`
 			})
-        }).then(resp => resp.json())
-        .then(data => {
-            data = data.tracks
-            data.items = data.items.map( (item:any) => ({
+        }).then(resp => {
+            if (resp.status === 401)
+                delete localStorage.access_token
+            return resp.json()
+        }).then(data => {
+            data = data && data.tracks || {}
+            data.items = data && data.items && data.items.map( (item:any) => ({
                 name: item.name,
-                image: item.album.images[0] && item.album.images[0].url,
+                image: item.album.images[2] && item.album.images[2].url,
                 id: item.id,
                 album: item.album.name,
                 artist: item.artists[0].name
             }))
             dispatch(actions.clearArtists())
             dispatch(actions.receiveSongs(data))
-        })
-        .catch(console.error)
+        }).catch(console.error)
+    }
+}
+
+export const clearScreen: Function = () => {
+    return (dispatch: Function) => {
+        dispatch(actions.clearArtists())
+        dispatch(actions.clearSongs())
     }
 }
 
@@ -40,18 +49,20 @@ export const searchArtists: Function = (query: string | null, paginateStr?: stri
 			headers: new Headers({
 				"Authorization": `Bearer ${access_token}`
 			})
-        }).then(resp => resp.json())
-        .then(data => {
+        }).then(resp => {
+            if (resp.status === 401)
+                delete localStorage.access_token
+            return resp.json()
+        }).then(data => {
             data = data.artists
             data.items = data.items.map( (item:any) => ({
                 name: item.name,
-                image: item.images[0] && item.images[0].url,
+                image: item.images[2] && item.images[2].url,
                 id: item.id
             }))
             dispatch(actions.clearSongs())
             dispatch(actions.receiveArtists(data))
-        })
-        .catch(console.error)
+        }).catch(console.error)
     }
 }
 
@@ -63,11 +74,13 @@ export const getArtist: Function = (artistId: string) => {
             headers: new Headers({
                 "Authorization": `Bearer ${access_token}`
             })
-        }).then(resp => resp.json())
-        .then(data => {
+        }).then(resp => {
+            if (resp.status === 401)
+                delete localStorage.access_token
+            return resp.json()
+        }).then(data => {
             dispatch(actions.receiveArtist(data))
-        })
-        .catch(console.error)
+        }).catch(console.error)
     }
 }
 
@@ -79,8 +92,11 @@ export const getTopTracks: Function = (artistId: string) => {
             headers: new Headers({
 			    "Authorization": `Bearer ${access_token}`
             })
-        }).then(resp => resp.json())
-        .then(data => dispatch(actions.receiveTopTracks(data)))
+        }).then(resp => {
+            if (resp.status === 401)
+                delete localStorage.access_token
+            return resp.json()
+        }).then(data => dispatch(actions.receiveTopTracks(data)))
         .catch(console.error)
     }
 }

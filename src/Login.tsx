@@ -9,7 +9,7 @@ const Login: React.FC = () => {
         const
             responseType = "response_type=token",
             clientId = "client_id=668e28df2f574688a99805e534c1ee83",
-            redirectUri = "redirect_uri=http://localhost:3000/home",
+            redirectUri = "redirect_uri=http://localhost:3000",
             showDialog = "show_dialog=true",
             spotifyAuthPage = `https://accounts.spotify.com/authorize?${responseType}&${clientId}&${redirectUri}&${showDialog}`
 
@@ -17,7 +17,8 @@ const Login: React.FC = () => {
     }, [])
 
     return (
-        <div className="login">
+        <div className="login flex-container">
+            <h1>Login to SpotAPI</h1>
             {(loginString) ? <a href={loginString}>Connect to Spotify</a> : ""}
         </div>
     )

@@ -8,14 +8,14 @@ interface Props {
 }
 
 const ArtistBrowser: React.FC<Props> = (props) => {
-
-	console.log("ARTISTS", props.artists)
 	
 	const showArtistList = () => {
-		if (!!props.artists) {
+		if (!!props.artists.artists) {
 			return (
 				<div>
+					<h3 className="category-header">Artists</h3>
 					{props.artists.artists && props.artists.artists.map( (artist:any, key:number) => <ArtistThumb key={`artist_${key}`} artist={artist} />)}
+					{showPag()}
 				</div>
 			)
 		} else {
@@ -25,18 +25,17 @@ const ArtistBrowser: React.FC<Props> = (props) => {
 
 	const showPag = () => {
 		return (
-			<div>
-				{(props.artists.prev) ? <button onClick={() => props.handlePag(props.artists.prev, "artists")} >Previous Page</button> : ""}
-				{(props.artists.next) ? <button onClick={() => props.handlePag(props.artists.next, "artists")} >Next Page</button> : ""}
+			<div className="pagination flex-container">
+				{(props.artists.previous) ? <button onClick={() => props.handlePag(props.artists.previous, "artists")} >Previous</button> : ""}
+				<div className="flex-spacer" />
+				{(props.artists.next) ? <button onClick={() => props.handlePag(props.artists.next, "artists")} >Next</button> : ""}
 			</div>
 		)
 	}
 
 	return (
 		<div>
-			<h3>Artists</h3>
 			{showArtistList()}
-			{showPag()}
 		</div>
 	)
 }

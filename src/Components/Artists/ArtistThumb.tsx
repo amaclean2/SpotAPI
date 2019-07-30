@@ -11,9 +11,9 @@ const ArtistThumb: React.FC<Props> = (props) => {
 
 	return (
 		<NavLink to={`/artist/${props.artist.id}`} className="artist-thumb flex-container">
-			<img src={imageUrl} alt={props.artist.name} />
+			{(imageUrl) ? <img src={imageUrl} alt={props.artist.name} /> : <div className="blank-block" />}
 			{props.artist.name}
-			<div className="flex-spacer"></div>
+			<div className="flex-spacer" />
 		</NavLink>
 	)
 }

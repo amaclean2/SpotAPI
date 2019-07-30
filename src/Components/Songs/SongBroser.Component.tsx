@@ -10,10 +10,12 @@ interface Props {
 const SongBroser: React.FC<Props> = (props) => {
 
 	const showSongList = () => {
-		if (!!props.songs) {
+		if (!!props.songs.songs) {
 			return (
                 <div>
-				    {props.songs.songs && props.songs.songs.map( (song:any, key:number) => <SongThumb key={`song_${key}`} song={song} />)}
+					<h3 className="category-header">Songs</h3>
+					{props.songs.songs && props.songs.songs.map( (song:any, key:number) => <SongThumb key={`song_${key}`} song={song} />)}
+					{showPag()}
                 </div>
             )
 		} else {
@@ -23,18 +25,16 @@ const SongBroser: React.FC<Props> = (props) => {
 
 	const showPag = () => {
 		return (
-			<div>
-				{(props.songs.prev) ? <button onClick={() => props.handlePag(props.songs.prev, "songs")} >Previous Page</button> : ""}
-				{(props.songs.next) ? <button onClick={() => props.handlePag(props.songs.next, "songs")} >Next Page</button> : ""}
+			<div className="pagination flex-container">
+				{(props.songs.previous) ? <button onClick={() => props.handlePag(props.songs.previous, "songs")} >Previous</button> : ""}
+				{(props.songs.next) ? <button onClick={() => props.handlePag(props.songs.next, "songs")} >Next</button> : ""}
 			</div>
 		)
 	}
 
 	return (
 		<div>
-			<h3>Songs</h3>
 			{showSongList()}
-			{showPag()}
 		</div>
 	)
 }

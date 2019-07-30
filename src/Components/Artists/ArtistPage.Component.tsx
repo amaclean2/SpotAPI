@@ -18,34 +18,50 @@ const ArtistPage: React.FC = (props:any) => {
     }, [props.artist, props.tracks])
 
     const showArtistDetails = () => {
-        return (artist)
-            ? (
-                <div>
+        if (artist) {
+            const artistHeroImage = (artist.images[0]) ? `url(${artist.images[0].url})` : "#CCC"
+            return (
+                <div className="artist-meta-content">
                     <h2>{artist.name}</h2>
-                    <img src={artist.images[0].url} alt={artist.name} />
-                    <div>
-                        <span>Followers</span> <span>{artist.followers.total}</span>
+                    <div className="artist-hero" style={{backgroundImage: artistHeroImage}}/>
+                    <div className="followers">
+                        <b>Followers</b> <span>{artist.followers.total}</span>
                     </div>
-                    <div>
-                        <h4>Genres</h4>
-                        {artist.genres.map( (genre:string, key:number) => <span className="genre" key={`genre_${key}`} >{genre}</span>)}
+                    <div className="genres">
+                        <b>Genres</b> {artist.genres.map( (genre:string, key:number) => <span className="genre" key={`genre_${key}`} >{genre}</span>)}
                     </div>
                 </div>
-            ) : ""
+            )
+        } else {
+            return ""
+        }
     }
+
+    const trackThumb = (track:any, key:number) => (
+        <div key={`track_${key}`} className="song-thumb track flex-container">
+            <div className="song-meta flex-container">
+                <span>{track.name}</span>
+                <div className="sub-headers">
+                    <span>{track.album.name}</span>
+                </div>
+            </div>
+            <img src={track.album.images[2].url} alt={track.name} />
+        </div>
+    )
 
     const showTopTracks = () => {
         return (topTracks && topTracks.tracks)
             ? (
-                <div>
-                    {topTracks.tracks.map((track:any , key:number) => (<div key={`track_${key}`}>{track.name} - {track.album.name}</div>))}
+                <div className="top-tracks">
+                    <h3>Popular</h3>
+                    {topTracks.tracks.map((track:any , key:number) => trackThumb(track, key))}
                 </div>
             ) : ""
     }
 
 	return (
-        <div>
-            <NavLink to="/home">Back to Home</NavLink>
+        <div className="artist-page">
+            <NavLink className="back-button" to="/home">Back to Search</NavLink>
             {showArtistDetails()}
             {showTopTracks()}
         </div>

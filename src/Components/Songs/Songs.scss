@@ -1,0 +1,22 @@
+.song-thumb {
+
+    img {
+        margin-right: 0;
+    }
+
+    .sub-headers{
+        align-items: flex-start;
+        font-size: 13px;
+        color: #999;
+
+        span {
+            padding: 5px 10px 0 0;
+        }
+    }
+
+    .song-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 10px;
+    }
+}

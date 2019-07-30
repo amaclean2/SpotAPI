@@ -7,10 +7,14 @@ interface Props {
 
 const SongThumb: React.FC<Props> = (props) => {
 	return (
-		<div>
-			{props.song.name}
-			{props.song.artist}
-			{props.song.album}
+		<div className="song-thumb flex-container">
+			<div className="song-meta flex-container">
+				<span className="song-title">{props.song.name}</span>
+				<div className="sub-headers flex-container">
+					<span className="song-artist">{props.song.artist}</span>
+					<span className="song-album">{props.song.album}</span>
+				</div>
+			</div>
 			<img src={props.song.image} alt={props.song.name} />
 		</div>
 	)
