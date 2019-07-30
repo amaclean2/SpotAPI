@@ -4,7 +4,7 @@ React + Redux application to create a Spotify library searcher
 
 ## Launch Instructions
 
-Application Deployed on an AWS EC2 Server [here](52.14.191.202)
+Application Deployed on an AWS EC2 Server [here](http://52.14.191.202)
 
 This is the github repo for the project
 
