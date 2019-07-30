@@ -8,7 +8,7 @@ const Login: React.FC = () => {
         const
             responseType = "response_type=token",
             clientId = "client_id=668e28df2f574688a99805e534c1ee83",
-            redirectUri = "redirect_uri=http://localhost:3000",
+            redirectUri = "redirect_uri=http://localhost",
             showDialog = "show_dialog=true",
             spotifyAuthPage = `https://accounts.spotify.com/authorize?${responseType}&${clientId}&${redirectUri}&${showDialog}`
 
