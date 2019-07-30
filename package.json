@@ -25,7 +25,10 @@
     "start": "PORT=80 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier:base": "prettier --parser typescript",
+    "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
+    "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -43,9 +46,10 @@
     ]
   },
   "devDependencies": {
-    "tslint": "^5.18.0",
-    "tslint-react": "^4.0.0",
     "@types/redux-logger": "^3.0.7",
-    "redux-logger": "^3.0.6"
+    "prettier": "1.18.2",
+    "redux-logger": "^3.0.6",
+    "tslint": "^5.18.0",
+    "tslint-react": "^4.0.0"
   }
 }
