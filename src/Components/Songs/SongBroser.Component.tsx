@@ -27,6 +27,7 @@ const SongBroser: React.FC<Props> = (props) => {
 		return (
 			<div className="pagination flex-container">
 				{(props.songs.previous) ? <button onClick={() => props.handlePag(props.songs.previous, "songs")} >Previous</button> : ""}
+				<div className="flex-spacer" />
 				{(props.songs.next) ? <button onClick={() => props.handlePag(props.songs.next, "songs")} >Next</button> : ""}
 			</div>
 		)
