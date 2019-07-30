@@ -15,3 +15,10 @@ Make sure node and npm are installed
 ```npm install```
 
 ```npm start```
+
+## Notes
+
+I didn't implement any of the unit testing because I ran out of time, but the application is still small.
+Can be added later
+
+My TypeScript knowledge is still pretty basic but here's the app built from what I know
