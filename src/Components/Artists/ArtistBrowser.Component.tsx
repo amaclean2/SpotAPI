@@ -7,6 +7,8 @@ interface Props {
 	handlePag:any
 }
 
+// provides list of artists in the search query
+
 const ArtistBrowser: React.FC<Props> = ({ artists, handlePag }) => {
 	
 	const showArtistList = () => {

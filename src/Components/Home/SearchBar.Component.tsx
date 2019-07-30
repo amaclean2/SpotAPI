@@ -8,6 +8,8 @@ interface Props {
 	clearScreen: any
 }
 
+// search and header information
+
 const SearchBar: React.FC<Props> = ({ searchArtists, searchSongs, clearScreen }) => {
 	const [selector, setSelector] = useState("artists")
 

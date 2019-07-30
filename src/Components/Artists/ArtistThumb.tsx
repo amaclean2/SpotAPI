@@ -6,6 +6,8 @@ interface Props {
 	artist: any
 }
 
+// individual artist thumbnails
+
 const ArtistThumb: React.FC<Props> = ({ artist }) => {
 	const imageUrl = artist.image
 

@@ -7,6 +7,8 @@ interface Props {
 	handlePag: any,
 }
 
+// provides list of songs in the search query
+
 const SongBrowser: React.FC<Props> = ({ songs, handlePag }) => {
 
 	const showSongList = () => {

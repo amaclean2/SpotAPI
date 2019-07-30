@@ -10,6 +10,8 @@ interface Props {
     match:any
 }
 
+// content for artist page
+
 const ArtistPage: React.FC<Props> = ({ getArtist, getTopTracks, artist, tracks, match}) => {
     useEffect(() => {
         getArtist(match.params.id)

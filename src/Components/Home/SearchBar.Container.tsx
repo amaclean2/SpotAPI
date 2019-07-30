@@ -2,6 +2,8 @@ import { connect } from 'react-redux'
 import { searchSongs, searchArtists, clearScreen } from '../../Redux/Operations'
 import SearchBar from './SearchBar.Component'
 
+// maps redux to search bar
+
 const mapStateToProps = (state:any) => ({
     
 })
