@@ -22,3 +22,5 @@ I didn't implement any of the unit testing because I ran out of time, but the ap
 Can be added later
 
 My TypeScript knowledge is still pretty basic but here's the app built from what I know
+
+My gist documentation is [here](https://gist.github.com/amaclean2/c907b982d436bd74e6f51603b22d2fd2)
